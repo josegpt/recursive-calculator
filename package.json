@@ -1,0 +1,23 @@
+{
+  "name": "recursive-calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --env=node --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josegpt/recursive-calculator.git"
+  },
+  "keywords": [],
+  "author": "Jose G Perez Taveras <josegpt27@gmail.com> (https://josegpt.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/josegpt/recursive-calculator/issues"
+  },
+  "homepage": "https://github.com/josegpt/recursive-calculator#readme",
+  "devDependencies": {
+    "jest": "^23.4.2"
+  }
+}
