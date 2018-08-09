@@ -1,42 +1,51 @@
-const calculator = (iNumber, stmt) => {
-  let t1 = term(iNumber, stmt)
+const calculator = () => {
+  let iNumber = -1
 
-  while (true) {
-    const token = stmt[++iNumber]
-    if (token !== '+' && token !== '-') {
-      return t1
+  const expr = (stmt) => {
+    let t1 = term(stmt)
+
+    while (true) {
+      const token = stmt[iNumber]
+
+      if (token !== '+' && token !== '-') {
+        return t1
+      }
+
+      const t2 = term(stmt)
+  
+      if (token === '+')
+        t1 = new Plus(iNumber, t1, t2)
+      else
+        t1 = new Minus(iNumber, t1, t2)
     }
-
-    const t2 = term(++iNumber, stmt)
-
-    if (token === '+')
-      t1 = new Plus(iNumber, t1, t2)
-    else
-      t1 = new Minus(iNumber, t1, t2)
   }
-}
 
-const term = (iNumber, stmt) => {
-  let t1 = primary(iNumber, stmt)
+  const term = (stmt) => {
+    let t1 = primary(stmt)
 
-  while (true) {
-    const token = stmt[++iNumber]
+    while (true) {
+      const token = stmt[++iNumber]
 
-    if (token !== '*' && token !== '/') {
-      return t1
+      if (token !== '*' && token !== '/') {
+        return t1
+      }
+
+      const t2 = primary(stmt)
+  
+      if (token === '*')
+        t1 = new Mult(iNumber, t1, t2)
+      else
+        t1 = new Div(iNumber, t1, t2)
     }
-
-    const t2 = primary(++iNumber, stmt)
-
-    if (token === '*')
-      t1 = new Mult(iNumber, t1, t2)
-    else
-      t1 = new Div(iNumber, t1, t2)
   }
-}
 
-const primary = (iNumber, stmt) => {
-  return new Primary(iNumber, stmt[iNumber])
+  const primary = (stmt) => {
+    return new Primary(++iNumber, stmt[iNumber])
+  }
+
+  return {
+    statement: (stmt) => expr(stmt).Eval()
+  }
 }
 
 class ParseTree {
@@ -46,9 +55,7 @@ class ParseTree {
     this.right = right
   }
 
-  Eval() {
-    return 0
-  }
+  Eval() {}
 }
 
 class Expr extends ParseTree {
