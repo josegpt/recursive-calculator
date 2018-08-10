@@ -12,7 +12,11 @@ const calculator = () => {
       }
 
       const t2 = term(stmt)
-  
+
+      if (!t2.left) {
+        return t1
+      }
+
       if (token === '+')
         t1 = new Plus(iNumber, t1, t2)
       else
@@ -31,6 +35,10 @@ const calculator = () => {
       }
 
       const t2 = primary(stmt)
+
+      if (!t2.left) {
+        return t1
+      }
   
       if (token === '*')
         t1 = new Mult(iNumber, t1, t2)
@@ -56,12 +64,6 @@ class ParseTree {
   }
 
   Eval() {}
-}
-
-class Expr extends ParseTree {
-  constructor(iNumber, left, right) {
-    super(iNumber, left, right)
-  }
 }
 
 class Plus extends ParseTree {

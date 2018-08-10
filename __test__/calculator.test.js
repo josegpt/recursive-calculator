@@ -1,8 +1,14 @@
 const calculator = require('../src/calculator')
 
 describe('calculator()', () => {
-  it('does not crash in partial input without operand', () => {
+  it('does not crash in partial input without operator', () => {
     const sum = ['5']
+
+    expect(calculator().statement(sum)).toBe(5)
+  })
+
+  it('does not crash in partial input with operator', () => {
+    const sum = ['5', '+']
 
     expect(calculator().statement(sum)).toBe(5)
   })
