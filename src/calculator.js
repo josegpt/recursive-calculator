@@ -111,4 +111,4 @@ class Primary extends ParseTree {
   }
 }
 
-module.exports = exports = calculator
+export default calculator

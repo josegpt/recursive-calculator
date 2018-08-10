@@ -1,6 +1,6 @@
-const calculator = require('../src/calculator')
+import calculator from '../calculator'
 
-describe('calculator()', () => {
+describe('Calculator', () => {
   it('does not crash in partial input without operator', () => {
     const sum = ['5']
 
