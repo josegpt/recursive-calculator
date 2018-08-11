@@ -1,136 +1,28 @@
-import calculator from '../calculator'
+import React from 'react'
+import Enzyme, { shallow } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+import Calculator from '../components/Calculator'
+import Screen from '../components/Screen'
+import Pad from '../components/Pad'
 
-describe('Calculator', () => {
-  it('does not crash in partial input without operator', () => {
-    const sum = ['5']
+Enzyme.configure({ adapter: new Adapter() })
 
-    expect(calculator().statement(sum)).toBe(5)
+describe('<Calculator />', () => {
+  it('renders calculator wrapper', () => {
+    const wrapper = shallow(<Calculator />)
+
+    expect(wrapper.find('.calculator')).toHaveLength(1)
   })
 
-  it('does not crash in partial input with operator', () => {
-    const sum = ['5', '+']
+  it('renders calculator screen', () => {
+    const wrapper = shallow(<Calculator />)
 
-    expect(calculator().statement(sum)).toBe(5)
+    expect(wrapper.find(Screen)).toHaveLength(1)
   })
 
-  it('adds single digit numbers', () => {
-    const sum = ['5', '+', '5']
+  it('renders calculator pad', () => {
+    const wrapper = shallow(<Calculator />)
 
-    expect(calculator().statement(sum)).toBe(10)
+    expect(wrapper.find(Pad)).toHaveLength(1)
   })
-
-  it('adds double digit numbers', () => {
-    const sum = ['10', '+', '15']
-
-    expect(calculator().statement(sum)).toBe(25)
-  })
-
-  it('substracts single digit numbers', () => {
-    const sum = ['5', '-', '5']
-
-    expect(calculator().statement(sum)).toBe(0)
-  })
-
-  it('substracts double digit numbers', () => {
-    const sum = ['20', '-', '5']
-
-    expect(calculator().statement(sum)).toBe(15)
-  })
-
-  it('multiplies single digit numbers', () => {
-    const sum = ['5', '*', '5']
-
-    expect(calculator().statement(sum)).toBe(25)
-  })
-
-  it('multiplies double digit numbers', () => {
-    const sum = ['10', '*', '25']
-
-    expect(calculator().statement(sum)).toBe(250)
-  })
-
-  it('divides single digit numbers', () => {
-    const sum = ['5', '/', '5']
-
-    expect(calculator().statement(sum)).toBe(1)
-  })
-
-  it('divides double digit numbers', () => {
-    const sum = ['10', '/', '25']
-
-    expect(calculator().statement(sum)).toBe(0.4)
-  })
-
-  it('adds and substracts', () => {
-    const sum = ['5', '+', '5', '-', '5']
-
-    expect(calculator().statement(sum)).toBe(5)
-  })
-
-  it('adds and multiplies', () => {
-    const sum = ['5', '+', '5', '*', '5']
-
-    expect(calculator().statement(sum)).toBe(30)
-  })
-
-  it('adds and divides', () => {
-    const sum = ['5', '+', '5', '/', '5']
-
-    expect(calculator().statement(sum)).toBe(6)
-  })
-
-  it('substracts and adds', () => {
-    const sum = ['15', '-', '5', '+', '5']
-
-    expect(calculator().statement(sum)).toBe(15)
-  })
-
-  it('substracts and multiplies', () => {
-    const sum = ['15', '-', '5', '*', '5']
-
-    expect(calculator().statement(sum)).toBe(-10)
-  })
-
-  it('substracts and divides', () => {
-    const sum = ['15', '-', '5', '/', '5']
-
-    expect(calculator().statement(sum)).toBe(14)
-  })
-
-  it('multiplies and adds', () => {
-    const sum = ['15', '*', '5', '+', '5']
-
-    expect(calculator().statement(sum)).toBe(80)
-  })
-
-  it('multiplies and substracts', () => {
-    const sum = ['15', '*', '5', '-', '5']
-
-    expect(calculator().statement(sum)).toBe(70)
-  })
-
-  it('multiplies and divides', () => {
-    const sum = ['15', '*', '5', '/', '5']
-
-    expect(calculator().statement(sum)).toBe(15)
-  })
-
-  it('divides and adds', () => {
-    const sum = ['15', '/', '5', '+', '5']
-
-    expect(calculator().statement(sum)).toBe(8)
-  })
-
-  it('divides and substracts', () => {
-    const sum = ['15', '/', '5', '-', '5']
-
-    expect(calculator().statement(sum)).toBe(-2)
-  })
-
-  it('divides and multiplies', () => {
-    const sum = ['15', '/', '5', '*', '5']
-
-    expect(calculator().statement(sum)).toBe(15)
-  })
-
 })
